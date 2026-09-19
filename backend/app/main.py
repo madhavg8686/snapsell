@@ -1,3 +1,4 @@
+import hmac
 import os
 import re
 import uuid
@@ -259,6 +260,54 @@ async def razorpay_webhook(request: Request) -> dict:
     if order is None:
         return {"ignored": True}
     return {"credited": grant_credits(order["id"])}
+
+
+def require_admin(x_admin_password: str | None = Header(default=None)) -> None:
+    if not config.ADMIN_PASSWORD:
+        raise HTTPException(404, "Admin dashboard is not enabled")
+    if not x_admin_password or not hmac.compare_digest(x_admin_password, config.ADMIN_PASSWORD):
+        raise HTTPException(401, "Wrong admin password")
+
+
+@app.get("/api/admin/stats", dependencies=[Depends(require_admin)])
+def admin_stats() -> dict:
+    with db.cursor() as cur:
+        users = cur.execute(
+            "SELECT COUNT(*) AS total,"
+            " SUM(created_at >= date('now', '-7 day')) AS week,"
+            " SUM(created_at >= date('now')) AS today FROM users"
+        ).fetchone()
+        revenue = cur.execute(
+            "SELECT currency, COUNT(*) AS orders, SUM(amount_minor) AS minor,"
+            " SUM(credits) AS credits FROM orders WHERE status = 'paid' GROUP BY currency"
+        ).fetchall()
+        today = cur.execute(
+            "SELECT currency, SUM(amount_minor) AS minor FROM orders"
+            " WHERE status = 'paid' AND created_at >= date('now') GROUP BY currency"
+        ).fetchall()
+        tools = cur.execute(
+            "SELECT tool, COUNT(*) AS runs, SUM(cost) AS credits FROM runs"
+            " GROUP BY tool ORDER BY runs DESC"
+        ).fetchall()
+        orders = cur.execute(
+            "SELECT o.created_at, o.pack_id, o.amount_minor, o.currency, o.status, u.email"
+            " FROM orders o JOIN users u ON u.id = o.user_id ORDER BY o.id DESC LIMIT 25"
+        ).fetchall()
+        signups = cur.execute(
+            "SELECT email, credits, created_at FROM users ORDER BY id DESC LIMIT 25"
+        ).fetchall()
+        outstanding = cur.execute("SELECT SUM(credits) AS credits FROM users").fetchone()
+    return {
+        "users": {key: users[key] or 0 for key in ("total", "week", "today")},
+        "revenue": [dict(r) for r in revenue],
+        "revenue_today": [dict(r) for r in today],
+        "credits_outstanding": outstanding["credits"] or 0,
+        "tools": [dict(r) for r in tools],
+        "orders": [dict(r) for r in orders],
+        "signups": [dict(r) for r in signups],
+        "provider": config.active_provider(),
+        "ai": bool(config.OPENAI_API_KEY),
+    }
 
 
 @app.post("/api/webhooks/stripe")

@@ -33,6 +33,14 @@ for local work.
 | `SNAPSELL_DB` | SQLite path, default `/data/snapsell.db` |
 | `SNAPSELL_FREE_CREDITS` | credits granted on signup, default 5 |
 | `SNAPSELL_SITE_URL` | public site URL, used for Stripe return URLs |
+| `SNAPSELL_ADMIN_PASSWORD` | unlocks the owner dashboard at `/admin.html`; unset disables it |
+
+### Owner dashboard
+
+`/admin.html` shows revenue, signups, tool usage and recent orders. It reads
+`GET /api/admin/stats`, which requires the `X-Admin-Password` header. With
+`SNAPSELL_ADMIN_PASSWORD` unset the route returns 404 and the page cannot be
+unlocked.
 
 ### Payments
 

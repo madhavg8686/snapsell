@@ -18,6 +18,9 @@ STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
 
 PUBLIC_SITE_URL = os.environ.get("SNAPSELL_SITE_URL", "http://localhost:5173")
 
+# Owner dashboard. Empty disables /api/admin/* entirely.
+ADMIN_PASSWORD = os.environ.get("SNAPSELL_ADMIN_PASSWORD", "")
+
 # Payment provider: "razorpay", "stripe", or "" (auto-detect from configured keys).
 PAYMENT_PROVIDER = os.environ.get("SNAPSELL_PAYMENT_PROVIDER", "")
 

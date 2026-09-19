@@ -1,0 +1,35 @@
+.wrap { max-width: 1040px; margin: 0 auto; padding: 32px 24px 80px; }
+
+.gate {
+  max-width: 380px; margin: 60px auto; background: var(--panel);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.gate h1 { margin: 0; font-size: 22px; }
+.gate p { margin: 0; font-size: 14px; }
+.gate input {
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+  color: var(--text); padding: 11px 13px; font: inherit; font-size: 15px;
+}
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px;
+}
+.card .value { font-size: 28px; font-weight: 700; color: var(--accent); }
+.card .label { color: var(--muted); font-size: 13px; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 20px; margin-top: 18px; overflow-x: auto;
+}
+.panel h2 { margin: 0 0 12px; font-size: 16px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+tr:last-child td { border-bottom: none; }
+td.empty { color: var(--muted); text-align: center; padding: 18px; }
+.tag-paid { color: var(--accent-2); }
+.tag-created { color: var(--muted); }

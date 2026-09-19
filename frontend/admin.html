@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SnapSell admin</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin">
+<header class="topbar">
+  <a class="brand" href="/"><span class="logo">🏷️</span> SnapSell</a>
+  <nav>
+    <span class="pill">Admin</span>
+    <button id="signout" class="btn btn-sm hidden">Lock</button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <form id="gate" class="gate">
+    <h1>Owner dashboard</h1>
+    <p class="muted">Enter the admin password set in <code>SNAPSELL_ADMIN_PASSWORD</code>.</p>
+    <input id="password" type="password" placeholder="Admin password" autocomplete="current-password" required />
+    <button class="btn btn-primary" type="submit">Unlock</button>
+    <p id="gate-error" class="error hidden"></p>
+  </form>
+
+  <section id="board" class="hidden">
+    <div class="cards" id="kpis"></div>
+
+    <div class="panel">
+      <h2>Revenue</h2>
+      <table id="revenue"></table>
+    </div>
+
+    <div class="panel">
+      <h2>Tool usage</h2>
+      <table id="tools"></table>
+    </div>
+
+    <div class="panel">
+      <h2>Recent orders</h2>
+      <table id="orders"></table>
+    </div>
+
+    <div class="panel">
+      <h2>Recent signups</h2>
+      <table id="signups"></table>
+    </div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
