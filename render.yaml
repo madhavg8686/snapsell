@@ -23,5 +23,11 @@ services:
         sync: false
       - key: RAZORPAY_WEBHOOK_SECRET
         sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      # Set to this service's own URL once Render assigns it,
+      # e.g. https://snapsell-api.onrender.com
       - key: SNAPSELL_SITE_URL
-        value: https://frontend-uyosqhnz.devinapps.com
+        sync: false

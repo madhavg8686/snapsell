@@ -5,7 +5,7 @@ there is a single URL and no CORS setup.
 
 ## 1. Deploy on Render
 
-1. Push this repo to GitHub.
+1. Push this repo to GitHub (done: https://github.com/madhavg8686/snapsell).
 2. Render dashboard -> **New** -> **Blueprint**, pick the repo. Render reads
    [`render.yaml`](render.yaml): Docker runtime, health check on `/health`, and
    a 1 GB disk mounted at `/data` for the SQLite database.
