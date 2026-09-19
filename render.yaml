@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: snapsell-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    plan: starter
+    disk:
+      name: snapsell-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: SNAPSELL_DB
+        value: /data/snapsell.db
+      - key: SNAPSELL_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: SNAPSELL_SITE_URL
+        value: https://frontend-uyosqhnz.devinapps.com

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SnapSell — AI toolkit for secondhand sellers</title>
+<meta name="description" content="Write listings, price items, handle hagglers and spot scam buyers. Five AI tools built for OLX, Facebook Marketplace, eBay and Vinted sellers." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>" />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="logo">🏷️</span> SnapSell</a>
+  <nav>
+    <a href="#tools">Tools</a>
+    <a href="#pricing">Pricing</a>
+    <span id="credit-pill" class="pill hidden"></span>
+    <button id="nav-auth" class="btn btn-sm">Sign in</button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <p class="eyebrow">For people who sell their stuff online</p>
+    <h1>Your old stuff sells faster<br />when the words are right.</h1>
+    <p class="sub">SnapSell is five AI tools for secondhand sellers: write the listing, set the price,
+      answer the haggler, screen the scammer, and repost everywhere in one go.</p>
+    <div class="cta-row">
+      <button class="btn btn-primary btn-lg" id="hero-cta">Start free — <span id="free-credits">5</span> credits</button>
+      <a class="btn btn-ghost btn-lg" href="#tools">See the tools</a>
+    </div>
+    <p class="micro">No subscription. Credits never expire. 1 credit ≈ 1 listing.</p>
+  </section>
+
+  <section id="tools" class="section">
+    <h2>Five tools, one credit balance</h2>
+    <div class="grid" id="tool-grid"></div>
+  </section>
+
+  <section id="workspace" class="section hidden">
+    <h2 id="workspace-title">Workspace</h2>
+    <div class="workspace">
+      <form id="tool-form" class="card"></form>
+      <div id="output" class="card output"><p class="muted">Output appears here.</p></div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <h2>Credit packs</h2>
+    <p class="section-sub">Buy once, use across every tool. Most sellers spend 2–6 credits per item.</p>
+    <div class="grid" id="pack-grid"></div>
+    <p class="micro" id="provider-note"></p>
+  </section>
+
+  <section class="section faq">
+    <h2>How the business works</h2>
+    <div class="grid">
+      <div class="card"><h3>Credits, not seats</h3><p>Sellers are seasonal. Credits mean a user who clears out their garage twice a year still pays, without cancelling a subscription in between.</p></div>
+      <div class="card"><h3>Five tools, one wallet</h3><p>Each extra tool raises credits burned per item without raising acquisition cost — the cheapest growth lever there is.</p></div>
+      <div class="card"><h3>Unit economics</h3><p>A credit costs us a fraction of a cent in model spend and sells for roughly 6–8¢. Gross margin stays above 90% at any volume.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>SnapSell · AI-generated prices and risk scores are estimates, not advice. Verify before you sell or ship.</p>
+</footer>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close">×</button>
+    <h3 id="auth-title">Create your account</h3>
+    <p class="muted" id="auth-sub">Get <span class="free-credits">5</span> free credits. No card needed.</p>
+    <form id="auth-form">
+      <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+      <label>Password<input type="password" name="password" required minlength="8" autocomplete="current-password" /></label>
+      <p class="error hidden" id="auth-error"></p>
+      <button class="btn btn-primary btn-block" type="submit" id="auth-submit">Create account</button>
+    </form>
+    <p class="micro switch">Already have an account? <a href="#" id="auth-switch">Sign in</a></p>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+[project]
+name = "snapsell-api"
+version = "0.1.0"
+description = "SnapSell API - AI toolkit for secondhand marketplace sellers"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "httpx",
+    "pydantic",
+]
